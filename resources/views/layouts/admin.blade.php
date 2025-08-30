@@ -10,6 +10,7 @@
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
         <link href="{{ asset('css/styles.css') }}" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        <link href="{{asset('vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
     </head>
     <body class="sb-nav-fixed">
         @include('layouts.partials.navbar')
@@ -17,6 +18,19 @@
             @include('layouts.partials.sidebar')
             <div id="layoutSidenav_content">
                 <main>
+
+                    <div class="container mt-3">
+                        @if(session('success'))
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                {{ session('success') }}
+                            </div>
+                        @elseif(session('error'))
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                {{ session('error') }}
+                            </div>
+                        @endif
+                    </div>
+    
                     @yield('content')
                 </main>
                 @include('layouts.partials.footer')
