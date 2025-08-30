@@ -51,6 +51,11 @@
                         <i class="fas fa-fw fa-chart-area"></i>
                         <span>Kategori</span></a>
                 </li>
+                <li class="nav-item-active">
+                    <a class="nav-link" href="{{route('berita.index')}}">
+                        <i class="fas fa-fw fa-table"></i>
+                        <span>Berita</span></a>
+                </li>
             </div>
         </div>
         <div class="sb-sidenav-footer">
