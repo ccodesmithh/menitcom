@@ -56,6 +56,11 @@
                         <i class="fas fa-fw fa-table"></i>
                         <span>Berita</span></a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('user.index')}}">
+                        <i class="fas fa-fw fa-table"></i>
+                        <span>User</span></a>
+                </li>
             </div>
         </div>
         <div class="sb-sidenav-footer">

@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\BeritaController;
+use App\Http\Controllers\UserController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -31,5 +32,7 @@ Route::post('berita', [BeritaController::class, 'store'])->name('berita.store');
 Route::get('berita/{berita}/edit', [BeritaController::class, 'edit'])->name('berita.edit');
 Route::put('berita/{berita}', [BeritaController::class, 'update'])->name('berita.update');
 Route::delete('berita/{berita}', [BeritaController::class, 'destroy'])->name('berita.destroy');
+
+Route::resource('user', UserController::class);
 
 require __DIR__.'/auth.php';
