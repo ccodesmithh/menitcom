@@ -5,7 +5,7 @@
 <div class="container-fluid">
     <div class="card shadow mb-4">
         <div class="card-header py-3 d-flex justify-content-between align-items-center">
-            <h6 class="m-0 font-weight-bold text-primary">Data Kategori</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Data Berita</h6>
             <a href="{{ route('berita.create') }}" class="btn btn-sm btn-primary">+ Tambah Berita</a>
         </div>
         <div class="card-body">
@@ -16,15 +16,17 @@
                         <tr>
                             <th>#</th>
                             <th>Judul</th>
+                            <th>Gambar</th>
                             <th>Kategori</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
-                         @foreach ($berita as $b)
+                        @foreach ($berita as $b)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $b->judul }}</td>
+                            <td><img src="{{ asset('storage/' . $b->gambar) }}" alt="" width="400"></td>
                             <td>{{ $b->kategori->nama }}</td>
                             <td>
                                 <a href="{{ route('berita.edit', $b->id) }}" class="btn btn-sm btn-warning">Edit</a>
