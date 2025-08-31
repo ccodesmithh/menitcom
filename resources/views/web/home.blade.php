@@ -34,9 +34,9 @@
                             <!-- <p>Rem ipsum dolor sit amet, consectetur adipisicing elit.</p> -->
                             <div class="trending-animated">
                                 <ul id="js-news" class="js-hidden">
-                                    <li class="news-item">Bangladesh dolor sit amet, consectetur adipisicing elit.</li>
-                                    <li class="news-item">Spondon IT sit amet, consectetur.......</li>
-                                    <li class="news-item">Rem ipsum dolor sit amet, consectetur adipisicing elit.</li>
+                                    <li class="news-item">Enak dibaca dan enak dimakan.</li>
+                                    <li class="news-item">Dunia dalam berita.</li>
+                                    <li class="news-item">Meong.</li>
                                 </ul>
                             </div>
                             

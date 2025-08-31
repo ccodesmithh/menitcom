@@ -16,6 +16,7 @@ class BeritaController extends Controller
      */
     public function show(Berita $berita)
     {
+        $berita->increment('views');
         return view('web.show', compact('berita'));
     }
     public function index()
