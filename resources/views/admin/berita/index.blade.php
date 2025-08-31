@@ -15,9 +15,11 @@
                     <thead>
                         <tr>
                             <th>#</th>
+                            <th>Penulis</th>
                             <th>Judul</th>
                             <th>Gambar</th>
                             <th>Kategori</th>
+                            <th>Dibaca</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -25,9 +27,11 @@
                         @foreach ($berita as $b)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
+                            <td>{{ $b->user->name }}</td>
                             <td>{{ $b->judul }}</td>
                             <td><img src="{{ asset('storage/' . $b->gambar) }}" alt="" width="400"></td>
                             <td>{{ $b->kategori->nama }}</td>
+                            <td>{{ $b->views }} x</td>
                             <td>
                                 <a href="{{ route('berita.edit', $b->id) }}" class="btn btn-sm btn-warning">Edit</a>
                                 <form method="POST" action="{{ route('berita.destroy', $b->id) }}" style="display:inline">
@@ -42,8 +46,11 @@
                     <tfoot>
                         <tr>
                             <th>#</th>
+                            <th>Penulis</th>
                             <th>Judul</th>
+                            <th>Gambar</th>
                             <th>Kategori</th>
+                            <th>Dibaca</th>
                             <th>Aksi</th>
                         </tr>
                     </tfoot>

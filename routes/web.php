@@ -29,6 +29,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::resource('kategori', KategoriController::class);
     Route::get('/kategori', [KategoriController::class, 'index'])->name('kategori.index');
 });
+Route::resource('berita', BeritaController::class);
 Route::get('berita', [BeritaController::class, 'index'])->name('berita.index');
 Route::get('berita/create', [BeritaController::class, 'create'])->name('berita.create');
 Route::post('berita', [BeritaController::class, 'store'])->name('berita.store');

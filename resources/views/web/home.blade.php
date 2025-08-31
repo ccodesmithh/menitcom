@@ -48,10 +48,10 @@
                         <!-- Trending Top -->
                         <div class="trending-top mb-30">
                             <div class="trend-top-img">
-                                <img src="assets/img/trending/trending_top.jpg" alt="">
+                                <img src="{{ asset('storage/' . $trending->gambar) }}" alt="">
                                 <div class="trend-top-cap">
-                                    <span>Appetizers</span>
-                                    <h2><a href="details.html">Welcome To The Best Model Winner<br> Contest At Look of the year</a></h2>
+                                    <span>{{ $trending->kategori->nama ?? 'Ga masuk kategori, nyet' }}</span>
+                                    <h2><a href="details.html">{{ $trending->judul }}</a></h2>
                                 </div>
                             </div>
                         </div>
