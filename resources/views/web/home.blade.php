@@ -51,7 +51,7 @@
                                 <img src="{{ asset('storage/' . $trending->gambar) }}" alt="">
                                 <div class="trend-top-cap">
                                     <span>{{ $trending->kategori->nama ?? 'Ga masuk kategori, nyet' }}</span>
-                                    <h2><a href="details.html">{{ $trending->judul }}</a></h2>
+                                    <h2><a href="{{ route('web.show', $trending->slug) }}">{{ $trending->judul }}</a></h2>
                                 </div>
                             </div>
                         </div>
@@ -250,7 +250,7 @@
                                                     </div>
                                                     <div class="what-cap">
                                                         <span class="color1">{{ $item->kategori->nama }}</span>
-                                                        <h4><a href="{{ route('berita.show', $item->id) }}">{{ $item->judul }}</a></h4>
+                                                        <h4><a href="{{ route('web.show', $item->slug) }}">{{ $item->judul }}</a></h4>
                                                     </div>
                                                 </div>
                                             </div>

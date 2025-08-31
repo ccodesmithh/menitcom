@@ -14,11 +14,14 @@ class BeritaController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function show(Berita $berita)
+    public function show($slug)
     {   
-        
+        $berita = Berita::where('slug', $slug)->first();
+        if (!$berita) {
+            abort(404);
+        }
         $berita->increment('views');
-        return view('web.show', compact('berita', ));
+        return view('web.show', compact('berita'));
     }
     public function index()
     {
