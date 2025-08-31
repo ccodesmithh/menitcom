@@ -93,4 +93,5 @@ class BeritaController extends Controller
         $berita->delete();
         return redirect()->route('berita.index')->with('success', 'Berita dihapus.');
     }
+    
 }
