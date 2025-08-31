@@ -5,7 +5,7 @@
 <div class="container-fluid">
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Ubah Kategori</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Ubah Berita</h6>
         </div>
         <div class="card-body">
             <form method="POST" enctype="multipart/form-data" action="{{ route('berita.update', $berita) }}">
@@ -42,8 +42,8 @@
         height: 300,
         toolbar: [
         ['style', ['style']],
-        ['font', ['bold', 'underline', 'clear']],
-        ['color', ['color']],
+        ['font', ['bold', 'underline', 'clear', 'fontname']],
+        ['color', ['color', 'forecolor']],
         ['para', ['ul', 'ol', 'paragraph']],
         ['table', ['table']],
         ['insert', ['link', 'picture', 'video']],

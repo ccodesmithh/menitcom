@@ -61,13 +61,14 @@ class BeritaController extends Controller
         return redirect()->route('berita.index')->with('success', 'Berita berhasil ditambahkan.');
     }
 
-    public function edit(Berita $berita)
+    public function edit($id)
     {
         $kategori = Kategori::all();
+        $berita = Berita::findOrFail($id);
         return view('admin.berita.edit', compact('berita', 'kategori'));
     }
 
-    public function update(Request $request, Berita $berita)
+    public function update(Request $request, $id)
     {
         $request->validate([ 
             'judul' => 'required',
@@ -75,6 +76,8 @@ class BeritaController extends Controller
             'kategori_id' => 'required|exists:kategoris,id',
             'gambar' => 'nullable|image|max:2048'
         ]);
+
+        $berita = Berita::findOrFail($id);
 
         if ($request->file('gambar')) {
             $path = $request->file('gambar')->store('berita', 'public');
