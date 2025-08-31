@@ -14,6 +14,10 @@ class BeritaController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function show(Berita $berita)
+    {
+        return view('web.show', compact('berita'));
+    }
     public function index()
     {
         $berita = Auth::user()->role === 'admin'
