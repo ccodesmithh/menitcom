@@ -50,7 +50,7 @@
                                 <div class="header-info-left">
                                     <ul>     
                                         <!-- <li><img src="assets/img/icon/header_icon1.png" alt="">34ºc, Sunny </li> -->
-                                        <li><img src="assets/img/icon/header_icon1.png" alt="">{{ date('Y M D') }}</li>
+                                        <li><img src="{{asset('assets/img/icon/header_icon1.png')}}" alt="">{{ date('Y M D') }}</li>
                                     </ul>
                                 </div>
                                 <div class="header-info-right">
@@ -70,7 +70,7 @@
                             <!-- Logo -->
                             <div class="col-xl-3 col-lg-3 col-md-3">
                                 <div class="logo">
-                                    <a href="index.html"><img src="{{ asset('assets/img/logo/logo.png') }}" alt="" width="200px" loading="lazy"></a>
+                                    <a href="{{ url('/') }}"><img src="{{ asset('assets/img/logo/logo.png') }}" alt="" width="200px" loading="lazy"></a>
                                 </div>
                             </div>
                             <div class="col-xl-9 col-lg-9 col-md-9">
@@ -87,7 +87,7 @@
                             <div class="col-xl-10 col-lg-10 col-md-12 header-flex">
                                 <!-- sticky -->
                                     <div class="sticky-logo">
-                                        <a href="index.html"><img src="{{asset('assets/img/logo/logo.png')}}" alt="" width="200px" style="position: relative; top: 10px;" loading="lazy"></a>
+                                        <a href="{{ url('/') }}"><img src="{{asset('assets/img/logo/logo.png')}}" alt="" width="200px" style="position: relative; top: 10px;" loading="lazy"></a>
                                     </div>
                                 <!-- Main-menu -->
                                 <div class="main-menu d-none d-md-block">
@@ -147,7 +147,7 @@
                             <div class="single-footer-caption">
                                 <!-- logo -->
                                 <div class="footer-logo">
-                                    <a href="index.html"><img src="{{asset('assets/img/logo/logo.png')}}" alt="" width="200px"></a>
+                                    <a href="{{ url('/') }}"><img src="{{asset('assets/img/logo/logo.png')}}" alt="" width="200px"></a>
                                 </div>
                                 <div class="footer-tittle">
                                     <div class="footer-pera">
