@@ -58,17 +58,20 @@
                         <!-- Trending Bottom -->
                         <div class="trending-bottom">
                             <div class="row">
+                                @foreach ($berita as $item)
                                 <div class="col-lg-4">
-                                <div class="single-bottom mb-35">
-                                    <div class="trend-bottom-img mb-30">
-                                        <img src="assets/img/trending/trending_bottom1.jpg" alt="">
-                                    </div>
-                                    <div class="trend-bottom-cap">
-                                        <span class="color1">Lifestyple</span>
-                                        <h4><a href="details.html">Get the Illusion of Fuller Lashes by “Mascng.”</a></h4>
+                                    <div class="single-bottom mb-35">
+                                        <div class="trend-bottom-img mb-30">
+                                            <img src="{{ asset('storage/' . $item->gambar) }}" alt="" class="square-img">
+                                        </div>
+                                        <div class="trend-bottom-cap">
+                                            <span class="color1">{{ $item->kategori->nama ?? 'Ga masuk kategori, nyet' }}</span>
+                                            <h4><a href="{{ route('web.show', $item->slug) }}">{{ $item->judul }}</a></h4>
+                                        </div>
                                     </div>
                                 </div>
-                                </div>
+                                @endforeach
+                            <!-- </div>
                                 <div class="col-lg-4">
                                     <div class="single-bottom mb-35">
                                         <div class="trend-bottom-img mb-30">
@@ -90,7 +93,7 @@
                                             <h4><a href="details.html"> Welcome To The Best Model Winner Contest</a></h4>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>

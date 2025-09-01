@@ -23,8 +23,7 @@
                         <!-- <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;"
                             src="{{ url('img/undraw_posting_photo.svg') }}" alt="..."> -->
                     </div>
-                    <p>Selamat datang di dashboard admin. Di sini Anda dapat mengelola konten, pengguna, dan pengaturan
-                        lainnya.</p>
+                    <p>Selamat datang di dashboard penulis. Di sini Anda dapat mengelola konten yang anda buat.</p>
                 </div>
             </div>
 

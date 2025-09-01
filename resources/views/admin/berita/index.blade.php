@@ -6,7 +6,11 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3 d-flex justify-content-between align-items-center">
             <h6 class="m-0 font-weight-bold text-primary">Data Berita</h6>
-            <a href="{{ route('berita.create') }}" class="btn btn-sm btn-primary">+ Tambah Berita</a>
+            <a href="{{ route('penulis.berita.create') }}" class="btn btn-sm btn-primary">+ Tambah Berita</a>
+        </div>
+        <div class="card-header py-3 d-flex justify-content-between align-items-center">
+            <p class="m-0 text-primary">Berikut berita yang telah ditulis.</p>
+            <p class="m-0 text-primary">Jumlah Berita: {{ $berita->count() }}</p>
         </div>
         <div class="card-body">
             <div class="table-responsive">
