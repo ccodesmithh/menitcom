@@ -48,7 +48,7 @@
                         <!-- Trending Top -->
                         <div class="trending-top mb-30">
                             <div class="trend-top-img">
-                                <img src="{{ asset('storage/' . $trending->gambar) }}" alt="">
+                                <img src="{{ asset('storage/' . $trending->gambar) }}" alt="" loading="lazy">
                                 <div class="trend-top-cap">
                                     <span>{{ $trending->kategori->nama ?? 'Ga masuk kategori, nyet' }}</span>
                                     <h2><a href="{{ route('web.show', $trending->slug) }}">{{ $trending->judul }}</a></h2>
@@ -62,7 +62,7 @@
                                 <div class="col-lg-4">
                                     <div class="single-bottom mb-35">
                                         <div class="trend-bottom-img mb-30">
-                                            <img src="{{ asset('storage/' . $item->gambar) }}" alt="" class="square-img">
+                                            <img src="{{ asset('storage/' . $item->gambar) }}" alt="" class="square-img" loading="lazy">
                                         </div>
                                         <div class="trend-bottom-cap">
                                             <span class="color1">{{ $item->kategori->nama ?? 'Ga masuk kategori, nyet' }}</span>

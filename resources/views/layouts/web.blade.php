@@ -50,7 +50,7 @@
                                 <div class="header-info-left">
                                     <ul>     
                                         <!-- <li><img src="assets/img/icon/header_icon1.png" alt="">34ºc, Sunny </li> -->
-                                        <li><img src="{{asset('assets/img/icon/header_icon1.png')}}" alt="">{{ date('Y M D') }}</li>
+                                        <li><img src="{{asset('assets/img/icon/header_icon1.png')}}" alt="">{{ date('Y M d D') }}</li>
                                     </ul>
                                 </div>
                                 <div class="header-info-right">
@@ -75,7 +75,7 @@
                             </div>
                             <div class="col-xl-9 col-lg-9 col-md-9">
                                 <div class="header-banner f-right ">
-                                    <img src="{{asset('assets/img/hero/header_card.jpg')}}" alt="">
+                                    <img src="{{asset('assets/img/hero/header_card.png')}}" alt="" loading="lazy">
                                 </div>
                             </div>
                         </div>
