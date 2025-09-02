@@ -58,7 +58,7 @@
                         <!-- Trending Bottom -->
                         <div class="trending-bottom">
                             <div class="row">
-                                @foreach ($berita as $item)
+                                @foreach ($berita->take(3) as $item)
                                 <div class="col-lg-4">
                                     <div class="single-bottom mb-35">
                                         <div class="trend-bottom-img mb-30">

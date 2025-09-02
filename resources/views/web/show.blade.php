@@ -9,26 +9,48 @@
     <p>{!! $berita->isi !!}</p>
     <p>Kategori: {{ $berita->kategori ? $berita->kategori->nama : '-' }}</p>
     
-    <h3>Komentar</h3>
-    <form action="{{ route('komentar.store', $berita->id) }}" method="POST">
-        @csrf
-        <input type="text" name="nama" class="form-control mb-2" placeholder="Tulis Nama Lu" required>
-        <textarea name="isi" class="form-control mb-2" rows="3" placeholder="Tulis komentar ente..." required></textarea>
-        <button class="btn btn-primary">Kirim</button>
-    </form>
-    <hr>
+    <div class="card mb-4">
+        <div class="card-header">
+            <h3>Komentar</h3>
+        </div>
+        <div class="card-body">
+            <form action="{{ route('komentar.store', $berita->id) }}" method="POST">
+                @csrf
+                <div class="form-group">
+                    <label for="nama">Nama</label>
+                    <input type="text" name="nama" class="form-control" placeholder="Tulis Nama Lu" required>
+                </div>
+                <div class="form-group">
+                    <label for="isi">Komentar</label>
+                    <textarea name="isi" class="form-control" rows="3" placeholder="Tulis komentar ente..." required></textarea>
+                </div>
+                <button class="btn btn-primary">Kirim</button>
+            </form>
+        </div>
+    </div>
 
     @if($berita->komentars->isEmpty())
-        <p>Belum ada komentar.</p>
+        <p class="text-muted">Belum ada komentar.</p>
     @else
-        @foreach($berita->komentars as $komentar)
-            <div class="mb-3 p-2 border rounded">
-                <strong>{{ $komentar->nama }}</strong> <br>
-                <small>{{ $komentar->created_at->format('d M Y H:i') }}</small>
-                <p>{{ $komentar->isi }}</p>
+        <div class="card mb-4">
+            <div class="card-header">
+                <h3>Daftar Komentar</h3>
             </div>
-        @endforeach
+            <div class="card-body">
+                @foreach($berita->komentars as $komentar)
+                    <div class="media mb-3">
+                        <div class="media-body">
+                            <h5 class="mt-0">{{ $komentar->nama }}</h5>
+                            <small>{{ $komentar->created_at->format('d M Y H:i') }}</small>
+                            <p>{{ $komentar->isi }}</p>
+                        </div>
+                    </div>
+                @endforeach
+                <div class="d-flex justify-content-center">
+                    {{ $komentars->links('pagination::bootstrap-4') }}
+                </div>
+            </div>
+        </div>
     @endif
-
 </div>
 @endsection

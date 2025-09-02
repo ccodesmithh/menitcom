@@ -21,7 +21,8 @@ class BeritaController extends Controller
             abort(404);
         }
         $berita->increment('views');
-        return view('web.show', compact('berita'));
+        $komentars = $berita->komentars()->latest()->paginate(5);
+        return view('web.show', compact('berita', 'komentars'));
     }
     public function index()
     {
