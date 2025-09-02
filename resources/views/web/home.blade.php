@@ -1,7 +1,6 @@
 @extends('layouts.web')
 @section('content')
 <style>
-/* buat gambar tetap 1:1 dan memotong sesuai (cover) */
 .square-img {
 	width: 100%;
 	aspect-ratio: 1 / 1;
@@ -98,8 +97,7 @@
                                                 alt="{{ $trend->judul }}">
                                         @endif
                                         <div class="flex-fill">
-                                            <h6 class="mb-2" style="margin-left: 10px;">{{ Str::limit($trend->judul, 50) }}</h6> {{-- kasih mb-2 --}}
-                                            <small class="text-muted">👁️ {{ $trend->views }} views</small>
+                                            <h6 class="mb-2" style="margin-left: 10px;">{{ Str::limit($trend->judul, 50) }}</h6> 
                                         </div>
                                     </a>
                                 @endforeach
@@ -117,7 +115,7 @@
                                                 alt="{{ $news->judul }}">
                                         @endif
                                         <div class="flex-fill">
-                                            <h6 class="mb-2" style="margin-left: 10px;">{{ Str::limit($news->judul, 50) }}</h6> {{-- kasih mb-2 --}}
+                                            <h6 class="mb-2" style="margin-left: 10px;">{{ Str::limit($news->judul, 50) }}</h6> 
                                             <small class="text-muted">{{ $news->created_at->diffForHumans() }}</small>
                                         </div>
                                     </a>
