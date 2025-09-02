@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('judul');
             $table->string('slug')->unique();
-            $table->text('isi');
+            $table->text('isi')->longText();
             $table->string('gambar')->nullable();
             $table->foreignId('kategori_id')->constrained('kategoris');
             $table->foreignId('user_id')->constrained('users');

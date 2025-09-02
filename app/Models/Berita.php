@@ -27,5 +27,10 @@ class Berita extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function komentars()
+    {
+        return $this->hasMany(Komentar::class);
+    }
+
 }
 
