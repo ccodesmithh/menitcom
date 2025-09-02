@@ -2,33 +2,48 @@
 
 @section('content')
 <div class="container-fluid">
+            <h1 class="mt-4">Dashboard</h1>
+            <ol class="breadcrumb mb-4">
+                <li class="breadcrumb-item active">Selamat Datang, {{Auth::user()->name}}</li>
+            </ol>
+              <div class="row mt-4">
 
-    <!-- Page Heading -->
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
-    </div>
+        <div class="col-md-4">
 
-    <!-- Content Row -->
-    <div class="row">
-        <div class="col-lg-12 mb-4">
-            <!-- Illustrations -->
-            <div class="card shadow mb-4">
-                <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Selamat Datang, {{ Auth::user()->name }}</h6>
-                </div>
+            <div class="card text-bg-secondary mb-3">
+
                 <div class="card-body">
-                    <div class="text-center">
-                        <!-- <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;"
-                            src="{{ url('img/undraw_posting_photo.svg') }}" alt="..."> -->
-                    </div>
-                    <p>Selamat datang di dashboard admin. Di sini Anda dapat mengelola konten, pengguna, dan pengaturan
-                        lainnya.</p>
+
+                    <h5 class="card-title">Total Berita Terbaru Hari ini</h5>
+
+                    <p class="fs-4">{{ $berita->count() }}</p>
+
                 </div>
+
             </div>
 
         </div>
+
     </div>
-</div>
+            <!-- <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-table me-1"></i>
+                    Data
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Position</th>
+                                <th>Office</th>
+                                <th>Age</th>
+                                <th>Start date</th>
+                                <th>Salary</th>
+                            </tr>
+                        </thead>
+                        </table>
+                </div>
+            </div> -->
+        </div>
 @endsection
