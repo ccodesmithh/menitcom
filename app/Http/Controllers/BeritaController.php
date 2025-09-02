@@ -22,7 +22,11 @@ class BeritaController extends Controller
         }
         $berita->increment('views');
         $komentars = $berita->komentars()->latest()->paginate(5);
-        return view('web.show', compact('berita', 'komentars'));
+        $kategori = $berita->kategori;
+        $trending = Berita::orderBy('views', 'desc')->take(5)->get();
+        $latest = Berita::latest()->take(5)->get();
+        $kategoris = Kategori::withCount('beritas')->orderBy('beritas_count', 'desc')->take(5)->get();
+        return view('web.show', compact('berita', 'komentars', 'kategori', 'trending', 'latest', 'kategoris'));
     }
     public function index()
     {

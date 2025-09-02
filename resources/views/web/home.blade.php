@@ -8,7 +8,7 @@
 	object-fit: cover;
 	display: block;
 }
-/* opsional: fallback sederhana bila browser tidak mendukung aspect-ratio */
+
 @supports not (aspect-ratio: 1/1) {
 	.square-img {
 		width: 100%;
@@ -16,7 +16,7 @@
 		padding-bottom: 100%;
 		object-fit: cover;
 	}
-	.square-img[style] { /* mencegah konflik bila inline style ada */
+	.square-img[style] { 
 		padding-bottom: 100%;
 	}
 }
@@ -47,13 +47,21 @@
                     <div class="col-lg-8">
                         <!-- Trending Top -->
                         <div class="trending-top mb-30">
-                            <div class="trend-top-img">
-                                <img src="{{ asset('storage/' . $trending->gambar) }}" alt="" loading="lazy">
-                                <div class="trend-top-cap">
-                                    <span>{{ $trending->kategori->nama ?? 'Ga masuk kategori, nyet' }}</span>
-                                    <h2><a href="{{ route('web.show', $trending->slug) }}">{{ $trending->judul }}</a></h2>
+                            @if($trendingOne)
+                                <div class="trend-top-img">
+                                    <img src="{{ asset('storage/' . $trendingOne->gambar) }}" 
+                                        alt="{{ $trendingOne->judul }}" 
+                                        loading="lazy">
+                                    <div class="trend-top-cap">
+                                        <span>{{ $trendingOne->kategori->nama ?? 'Tanpa Kategori' }}</span>
+                                        <h2>
+                                            <a href="{{ route('berita.show', $trendingOne->slug) }}">
+                                                {{ $trendingOne->judul }}
+                                            </a>
+                                        </h2>
+                                    </div>
                                 </div>
-                            </div>
+                            @endif
                         </div>
                         <!-- Trending Bottom -->
                         <div class="trending-bottom">
@@ -71,77 +79,60 @@
                                     </div>
                                 </div>
                                 @endforeach
-                            <!-- </div>
-                                <div class="col-lg-4">
-                                    <div class="single-bottom mb-35">
-                                        <div class="trend-bottom-img mb-30">
-                                            <img src="assets/img/trending/trending_bottom2.jpg" alt="">
-                                        </div>
-                                        <div class="trend-bottom-cap">
-                                            <span class="color2">Sports</span>
-                                            <h4><h4><a href="details.html">Get the Illusion of Fuller Lashes by “Mascng.”</a></h4></h4>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="single-bottom mb-35">
-                                        <div class="trend-bottom-img mb-30">
-                                            <img src="assets/img/trending/trending_bottom3.jpg" alt="">
-                                        </div>
-                                        <div class="trend-bottom-cap">
-                                            <span class="color3">Travels</span>
-                                            <h4><a href="details.html"> Welcome To The Best Model Winner Contest</a></h4>
-                                        </div>
-                                    </div>
-                                </div> -->
                             </div>
                         </div>
                     </div>
-                    <!-- Riht content -->
+                    <!-- Right Content -->
                     <div class="col-lg-4">
-                        <div class="trand-right-single d-flex">
-                            <div class="trand-right-img">
-                                <img src="assets/img/trending/right1.jpg" alt="">
+                        <div class="right-content">
+
+                            <h4 class="mb-3">Trending</h4>
+                            <div class="list-group mb-4">
+                                @foreach($trending as $trend)
+                                    <a href="{{ route('berita.show', $trend->slug) }}" 
+                                    class="list-group-item list-group-item-action d-flex align-items-start gap-3">
+                                        @if($trend->gambar)
+                                            <img src="{{ asset('storage/' . $trend->gambar) }}" 
+                                                class="rounded" 
+                                                style="width: 60px; height: 60px; object-fit: cover;" 
+                                                alt="{{ $trend->judul }}">
+                                        @endif
+                                        <div class="flex-fill">
+                                            <h6 class="mb-2" style="margin-left: 10px;">{{ Str::limit($trend->judul, 50) }}</h6> {{-- kasih mb-2 --}}
+                                            <small class="text-muted">👁️ {{ $trend->views }} views</small>
+                                        </div>
+                                    </a>
+                                @endforeach
                             </div>
-                            <div class="trand-right-cap">
-                                <span class="color1">Concert</span>
-                                <h4><a href="details.html">Welcome To The Best Model Winner Contest</a></h4>
+
+                            <h4 class="mb-3">Terbaru</h4>
+                            <div class="list-group mb-4">
+                                @foreach($latest as $news)
+                                    <a href="{{ route('berita.show', $news->slug) }}" 
+                                    class="list-group-item list-group-item-action d-flex align-items-start gap-3">
+                                        @if($news->gambar)
+                                            <img src="{{ asset('storage/' . $news->gambar) }}" 
+                                                class="rounded" 
+                                                style="width: 60px; height: 60px; object-fit: cover;" 
+                                                alt="{{ $news->judul }}">
+                                        @endif
+                                        <div class="flex-fill">
+                                            <h6 class="mb-2" style="margin-left: 10px;">{{ Str::limit($news->judul, 50) }}</h6> {{-- kasih mb-2 --}}
+                                            <small class="text-muted">{{ $news->created_at->diffForHumans() }}</small>
+                                        </div>
+                                    </a>
+                                @endforeach
                             </div>
-                        </div>
-                        <div class="trand-right-single d-flex">
-                            <div class="trand-right-img">
-                                <img src="assets/img/trending/right2.jpg" alt="">
-                            </div>
-                            <div class="trand-right-cap">
-                                <span class="color3">sea beach</span>
-                                <h4><a href="details.html">Welcome To The Best Model Winner Contest</a></h4>
-                            </div>
-                        </div>
-                        <div class="trand-right-single d-flex">
-                            <div class="trand-right-img">
-                                <img src="assets/img/trending/right3.jpg" alt="">
-                            </div>
-                            <div class="trand-right-cap">
-                                <span class="color2">Bike Show</span>
-                                <h4><a href="details.html">Welcome To The Best Model Winner Contest</a></h4>
-                            </div>
-                        </div> 
-                        <div class="trand-right-single d-flex">
-                            <div class="trand-right-img">
-                                <img src="assets/img/trending/right4.jpg" alt="">
-                            </div>
-                            <div class="trand-right-cap">
-                                <span class="color4">See beach</span>
-                                <h4><a href="details.html">Welcome To The Best Model Winner Contest</a></h4>
-                            </div>
-                        </div>
-                        <div class="trand-right-single d-flex">
-                            <div class="trand-right-img">
-                                <img src="assets/img/trending/right5.jpg" alt="">
-                            </div>
-                            <div class="trand-right-cap">
-                                <span class="color1">Skeping</span>
-                                <h4><a href="details.html">Welcome To The Best Model Winner Contest</a></h4>
+
+                            <h4 class="mb-3">Kategori</h4>
+                            <div class="list-group">
+                                @foreach($kategoris as $kat)
+                                    <a href="{{ route('kategori.show', $kat->id) }}" 
+                                    class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                        {{ $kat->nama }}
+                                        <span class="badge bg-primary rounded-pill">{{ $kat->beritas_count }}</span>
+                                    </a>
+                                @endforeach
                             </div>
                         </div>
                     </div>

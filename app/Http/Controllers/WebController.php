@@ -10,11 +10,21 @@ class WebController extends Controller
 {
     public function index()
     {
-        $headline = Berita::latest()->first();
-        $trending = Berita::orderBy('views', 'desc')->take(1)->first();
-        // dd($trending);
-        $berita = Berita::all();
-        return view('web.home', compact('berita', 'headline', 'trending'));
+        $headline   = Berita::latest()->first();
+        $trendingOne = Berita::orderBy('views', 'desc')->first();
+        $trending   = Berita::orderBy('views', 'desc')->take(1)->get();
+        $latest     = Berita::latest()->take(1)->get();
+        $kategoris  = Kategori::withCount('beritas')->get();
+        $berita     = Berita::latest()->get();
+
+        return view('web.home', compact(
+            'berita',
+            'headline',
+            'trendingOne',
+            'trending',
+            'latest',
+            'kategoris'
+        ));
     }
 
     public function show($slug)

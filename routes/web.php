@@ -38,6 +38,7 @@ Route::put('berita/{berita}', [BeritaController::class, 'update'])->name('berita
 Route::delete('berita/{berita}', [BeritaController::class, 'destroy'])->name('berita.destroy');
 Route::get('/berita/{slug}', [WebController::class, 'show'])->name('web.show');
 Route::post('/berita/{berita}/komentar', [\App\Http\Controllers\KomentarController::class, 'store'])->name('komentar.store');
+Route::get('/kategori/{id}', [KategoriController::class, 'show'])->name('kategori.show');
 
 
 
