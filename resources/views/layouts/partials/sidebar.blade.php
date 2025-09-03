@@ -61,6 +61,12 @@
                         <i class="fas fa-fw fa-table"></i>
                         <span>User</span></a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('admin.profile') }}">
+                        <i class="fas fa-user"></i>
+                        <span>Profil</span></a>
+                </li>
+
             </div>
         </div>
         <div class="sb-sidenav-footer">
