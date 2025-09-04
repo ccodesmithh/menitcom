@@ -24,7 +24,7 @@
             <div id="layoutSidenav_content">
                 <main>
 
-                    <div class="container mt-3">
+                    <!-- <div class="container mt-3">
                         @if(session('success'))
                             <div class="alert alert-success alert-dismissible fade show" role="alert">
                                 {{ session('success') }}
@@ -34,7 +34,7 @@
                                 {{ session('error') }}
                             </div>
                         @endif
-                    </div>
+                    </div> -->
     
                     @yield('content')
                 </main>

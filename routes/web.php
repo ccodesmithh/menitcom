@@ -22,16 +22,17 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::get('/admin/profile', [AdminController::class, 'profile'])->name('admin.profile');
-    Route::post('/admin/profile/update', [AdminController::class, 'updateProfile'])->name('admin.profile.update');
-    Route::get('/admin/profile', [AdminController::class, 'profile'])->name('admin.profile');
-    Route::put('/admin/profile/update', [AdminController::class, 'updateProfile'])->name('admin.profile.update');
 });
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     Route::resource('kategori', KategoriController::class);
     Route::get('/kategori', [KategoriController::class, 'index'])->name('kategori.index');
+    Route::get('/admin/user', [UserController::class, 'index'])->name('admin.user.index');
+    Route::get('/admin/profile', [AdminController::class, 'profile'])->name('admin.profile');
+    Route::post('/admin/profile/update', [AdminController::class, 'updateProfile'])->name('admin.profile.update');
+
+
 });
 Route::resource('berita', BeritaController::class);
 Route::get('berita', [BeritaController::class, 'index'])->name('berita.index');
@@ -45,11 +46,11 @@ Route::post('/berita/{berita}/komentar', [\App\Http\Controllers\KomentarControll
 Route::get('/kategori/{id}', [KategoriController::class, 'show'])->name('kategori.show');
 
 
-
 Route::resource('user', UserController::class);
+
 Route::middleware(['auth', 'role:penulis'])->prefix('penulis')->group(function () {
     Route::get('/dashboard', [PenulisController::class, 'dashboard'])->name('penulis.dashboard');
-
+    Route::resource('kategori', KategoriPenulisController::class);
     Route::get('kategori', [KategoriPenulisController::class,'index'])->name('penulis.kategori.index');
     
     Route::get('berita', [BeritaPenulisController::class, 'index'])->name('penulis.berita.index');
@@ -58,6 +59,8 @@ Route::middleware(['auth', 'role:penulis'])->prefix('penulis')->group(function (
     Route::get('berita/{berita}/edit', [BeritaPenulisController::class, 'edit'])->name('penulis.berita.edit');
     Route::put('berita/{berita}', [BeritaPenulisController::class, 'update'])->name('penulis.berita.update');
     Route::delete('berita/{berita}', [BeritaPenulisController::class, 'destroy'])->name('penulis.berita.destroy');
+    Route::get('/profile', [PenulisController::class, 'profile'])->name('penulis.profile');
+    Route::post('/profile/update', [PenulisController::class, 'updateProfile'])->name('penulis.profile.update');
 });
 
 Route::get('/dashboard', function () {
