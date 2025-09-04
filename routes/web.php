@@ -31,9 +31,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/user', [UserController::class, 'index'])->name('admin.user.index');
     Route::get('/admin/profile', [AdminController::class, 'profile'])->name('admin.profile');
     Route::post('/admin/profile/update', [AdminController::class, 'updateProfile'])->name('admin.profile.update');
-
-
 });
+
 Route::resource('berita', BeritaController::class);
 Route::get('berita', [BeritaController::class, 'index'])->name('berita.index');
 Route::get('berita/create', [BeritaController::class, 'create'])->name('berita.create');
