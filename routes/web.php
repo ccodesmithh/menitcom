@@ -11,6 +11,7 @@ use App\Http\Controllers\BeritaPenulisController;
 use App\Http\Controllers\KategoriPenulisController;
 use App\Http\Controllers\PenulisController;
 use App\Http\Controllers\WebController;
+use Symfony\Component\HttpKernel\Profiler\Profile;
 
 Route::get('/', [WebController::class, 'index'])->name('web.index');
 
@@ -21,7 +22,8 @@ Route::get('/dashboard', function () {
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::delete('/profile/delete', [ProfileController::class, 'destroyAccount'])->name('profile.destroy');
+
 });
 
 Route::middleware(['auth', 'role:admin'])->group(function () {

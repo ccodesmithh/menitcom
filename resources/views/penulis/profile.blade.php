@@ -92,7 +92,31 @@
             </div>
         </div>
     </form>
+        <div class="card shadow-lg border-0 rounded-3">
+        <div class="card-header bg-danger text-white">
+            <h5 class="mb-0">Hapus Akun</h5>
+        </div>
+        <div class="card-body">
+            <p class="text-muted">Akun Anda akan dihapus secara permanen. Tindakan ini tidak bisa dibatalkan.</p>
+
+            <form method="POST" action="{{ route('profile.destroy') }}">
+                @csrf
+                @method('DELETE')
+
+                <div class="mb-3">
+                    <label for="delete_password" class="form-label">Konfirmasi Password</label>
+                    <input type="password" name="password" id="delete_password" class="form-control @error('password') is-invalid @enderror" required>
+                    @error('password')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus akun ini?')">Hapus Akun</button>
+            </form>
+        </div>
+    </div>
 </div>
+
 
 @push('scripts')
 <script>

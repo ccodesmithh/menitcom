@@ -6,6 +6,8 @@ use App\Http\Requests\ProfileUpdateRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use App\Models\User;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 
@@ -57,4 +59,27 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
+        public function destroyAccount(Request $request)
+        {
+            $user = User::findOrFail(Auth::id());
+
+            $request->validate([
+                'password' => 'required|string',
+            ]);
+
+            if (!Hash::check($request->password, $user->password)) {
+                return back()->withErrors(['password' => 'Password salah, akun tidak bisa dihapus.']);
+            }
+
+            if ($user->avatar && file_exists(public_path('uploads/avatar/' . $user->avatar))) {
+                unlink(public_path('uploads/avatar/' . $user->avatar));
+            }
+
+            $user->delete();
+
+            Auth::logout();
+
+            return redirect('/')->with('status', 'Akun Anda berhasil dihapus.');
+        }
+
 }

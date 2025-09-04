@@ -31,7 +31,7 @@
                         @foreach ($berita as $b)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $b->user->name }}</td>
+                            <td>{{ $b->user ? $b->user->name : 'Penulis tidak ditemukan atau sudah tidak aktif' }}</td>
                             <td>{{ $b->judul }}</td>
                             <td><img src="{{ asset('storage/' . $b->gambar) }}" alt="" width="400"></td>
                             <td>{{ $b->kategori->nama }}</td>
