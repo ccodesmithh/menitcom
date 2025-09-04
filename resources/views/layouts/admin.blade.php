@@ -25,7 +25,7 @@
                 <main>
 
                     <div class="container mt-3">
-                        @if(session('success'))
+                        <!-- @if(session('success'))
                             <div class="alert alert-success alert-dismissible fade show" role="alert">
                                 {{ session('success') }}
                             </div>
@@ -33,7 +33,7 @@
                             <div class="alert alert-danger alert-dismissible fade show" role="alert">
                                 {{ session('error') }}
                             </div>
-                        @endif
+                        @endif -->
                     </div>
     
                     @yield('content')
