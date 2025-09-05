@@ -40,7 +40,7 @@
                     </div>
 
                     <div class="d-flex align-items-center">
-                        <a href="{{ url()->previous() }}" class="btn btn-outline-light btn-sm me-2">Batal</a>
+                        <a href="{{ route('profile.show') }}" class="btn btn-outline-light btn-sm me-2">Batal</a>
                         <button type="submit" class="btn btn-success btn-sm">Simpan</button>
                     </div>
                 </div>
@@ -54,7 +54,7 @@
                             <label for="avatar" class="btn btn-secondary btn-sm mb-0">
                                 Pilih Foto
                                 <input type="file" name="avatar" id="avatar"
-                                       class="d-none @error('avatar') is-invalid @enderror" accept="image/*">
+                                        @error('avatar') is-invalid @enderror" accept="image/*">
                             </label>
                             @error('avatar') <div class="text-danger small mt-2">{{ $message }}</div> @enderror
                             <div class="form-text mt-1">Maks 2MB. Format: jpg, png, gif.</div>
@@ -117,32 +117,5 @@
     </form>
 </div>
 
-@push('styles')
-<style>
-    .avatar-lg { width:50px; height:50px; object-fit:cover; }
-    .avatar-xl { width:120px; height:120px; object-fit:cover; }
-    .card-body { padding: 1.25rem; }
-</style>
-@endpush
-
-@push('scripts')
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    const input = document.getElementById('avatar');
-    const preview = document.getElementById('avatarPreview');
-    if (input) {
-        input.addEventListener('change', function (e) {
-            const file = e.target.files && e.target.files[0];
-            if (!file) return;
-            const reader = new FileReader();
-            reader.onload = function (ev) {
-                preview.src = ev.target.result;
-            };
-            reader.readAsDataURL(file);
-        });
-    }
-});
-</script>
-@endpush
 
 @endsection

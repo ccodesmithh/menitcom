@@ -72,23 +72,5 @@
 	</div>
 </div>
 
-@push('scripts')
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const avatarInput = document.getElementById('avatar');
-    const avatarPreview = document.getElementById('avatarPreview');
-    if (avatarInput && avatarPreview) {
-        avatarInput.addEventListener('change', function(event) {
-            const file = event.target.files[0];
-            if (!file) return;
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                avatarPreview.setAttribute('src', e.target.result);
-            };
-            reader.readAsDataURL(file);
-        });
-    }
-});
-</script>
-@endpush
+
 @endsection

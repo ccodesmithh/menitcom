@@ -10,7 +10,8 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
-use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Storage;
+
 class ProfileController extends Controller
 {
     /**
@@ -59,38 +60,78 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
-        public function profile()
+    public function profile()
     {
         $user = User::findOrFail(Auth::id());
         return view('profile.show', compact('user'));
     }
 
 
-        public function updateProfile(Request $request)
-        {
-            $user = User::findOrFail(Auth::id());
+    public function updateProfile(Request $request)
+    {
+        $user = User::findOrFail(Auth::id());
 
-            $request->validate([
-                'name' => 'required|string|max:255',
-                'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
-                'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
-                'current_password' => 'nullable|string',
-                'password' => 'nullable|string|min:8|confirmed',
-            ]);
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
+            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+            'current_password' => 'nullable|string',
+            'password' => 'nullable|string|min:8|confirmed',
+        ]);
 
-            $data = [
-                'name' => $request->name,
-                'email' => $request->email,
-            ];
+        $data = [
+            'name' => $request->name,
+            'email' => $request->email,
+        ];
 
-            if ($request->hasFile('avatar')) {
-                $avatar = $request->file('avatar');
-                $filename = time() . '.' . $avatar->getClientOriginalExtension();
-                $path = public_path('uploads/avatar/' . $filename);
+        if ($request->hasFile('avatar')) {
+            $avatar = $request->file('avatar');
+            $filename = time() . '.' . $avatar->getClientOriginalExtension();
+            $path = public_path('uploads/avatar/' . $filename);
 
-                Image::make($avatar)
-                    ->fit(500, 500)
-                    ->save($path);
+            [$width, $height, $type] = getimagesize($avatar);
+            switch ($type) {
+                case IMAGETYPE_JPEG:
+                    $srcImg = imagecreatefromjpeg($avatar);
+                    break;
+                case IMAGETYPE_PNG:
+                    $srcImg = imagecreatefrompng($avatar);
+                    break;
+                case IMAGETYPE_GIF:
+                    $srcImg = imagecreatefromgif($avatar);
+                    break;
+                case IMAGETYPE_WEBP:
+                    $srcImg = imagecreatefromwebp($avatar);
+                    break;
+                default:
+                    $srcImg = null;
+            }
+
+            if ($srcImg) {
+                $min = min($width, $height);
+                $srcX = ($width - $min) / 2;
+                $srcY = ($height - $min) / 2;
+
+                $dstImg = imagecreatetruecolor(500, 500);
+                imagecopyresampled($dstImg, $srcImg, 0, 0, $srcX, $srcY, 500, 500, $min, $min);
+
+                switch ($type) {
+                    case IMAGETYPE_JPEG:
+                        imagejpeg($dstImg, $path, 90);
+                        break;
+                    case IMAGETYPE_PNG:
+                        imagepng($dstImg, $path, 9);
+                        break;
+                    case IMAGETYPE_GIF:
+                        imagegif($dstImg, $path);
+                        break;
+                    case IMAGETYPE_WEBP:
+                        imagewebp($dstImg, $path, 90);
+                        break;
+                }
+
+                imagedestroy($srcImg);
+                imagedestroy($dstImg);
 
                 if ($user->avatar && file_exists(public_path('uploads/avatar/' . $user->avatar))) {
                     unlink(public_path('uploads/avatar/' . $user->avatar));
@@ -98,6 +139,7 @@ class ProfileController extends Controller
 
                 $data['avatar'] = $filename;
             }
+        }   
 
             if ($request->filled('password')) {
                 if (!Hash::check($request->current_password, $user->password)) {
@@ -110,29 +152,28 @@ class ProfileController extends Controller
             $user->save();
 
             return redirect()->route('profile.show')->with('success', 'Profil berhasil diperbarui!');
+    }       
+    public function destroyAccount(Request $request)
+    {
+        $user = User::findOrFail(Auth::id());
+
+        $request->validate([
+            'password' => 'required|string',
+        ]);
+
+        if (!Hash::check($request->password, $user->password)) {
+            return back()->withErrors(['password' => 'Password salah, akun tidak bisa dihapus.']);
         }
 
-        public function destroyAccount(Request $request)
-        {
-            $user = User::findOrFail(Auth::id());
-
-            $request->validate([
-                'password' => 'required|string',
-            ]);
-
-            if (!Hash::check($request->password, $user->password)) {
-                return back()->withErrors(['password' => 'Password salah, akun tidak bisa dihapus.']);
-            }
-
-            if ($user->avatar && file_exists(public_path('uploads/avatar/' . $user->avatar))) {
-                unlink(public_path('uploads/avatar/' . $user->avatar));
-            }
-
-            $user->delete();
-
-            Auth::logout();
-
-            return redirect('/')->with('status', 'Akun Anda berhasil dihapus.');
+        if ($user->avatar && file_exists(public_path('uploads/avatar/' . $user->avatar))) {
+            unlink(public_path('uploads/avatar/' . $user->avatar));
         }
+
+        $user->delete();
+
+        Auth::logout();
+
+        return redirect('/')->with('status', 'Akun Anda berhasil dihapus.');
+    }
 
 }

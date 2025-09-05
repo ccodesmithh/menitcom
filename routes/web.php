@@ -30,6 +30,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile/show', [ProfileController::class, 'profile'])->name('profile.show');
     Route::get('/profile/update', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::post('/profile', [ProfileController::class, 'updateProfile'])->name('profile.update');
+
 });
 
 Route::resource('berita', BeritaController::class);
