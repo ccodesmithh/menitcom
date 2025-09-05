@@ -37,6 +37,7 @@
                             <td>{{ $b->kategori->nama }}</td>
                             <td>{{ $b->views }} x</td>
                             <td>
+                                
                                 <a href="{{ route('berita.edit', $b->id) }}" class="btn btn-sm btn-warning">Edit</a>
                                 <form method="POST" action="{{ route('berita.destroy', $b->id) }}" style="display:inline">
                                     @csrf

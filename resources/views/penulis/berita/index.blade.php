@@ -37,8 +37,8 @@
                             <td>{{ $b->kategori->nama }}</td>
                             <td>{{ $b->views }} x</td>
                             <td>
-                                <a href="{{ route('berita.edit', $b->id) }}" class="btn btn-sm btn-warning">Edit</a>
-                                <form method="POST" action="{{ route('berita.destroy', $b->id) }}" style="display:inline">
+                                <a href="{{ route('penulis.berita.edit', $b->id) }}" class="btn btn-sm btn-warning">Edit</a>
+                                <form method="POST" action="{{ route('penulis.berita.destroy', $b->id) }}" style="display:inline">
                                     @csrf
                                     @method('DELETE')
                                     <button onclick="return confirm('Hapus?')" class="btn btn-sm btn-danger">Hapus</button>

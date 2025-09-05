@@ -7,6 +7,7 @@ use App\Models\Berita;
 use App\Models\Kategori;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 
 class BeritaController extends Controller
@@ -101,8 +102,19 @@ class BeritaController extends Controller
 
     public function destroy(Berita $berita)
     {
+        // Periksa apakah pengguna adalah admin atau pemilik berita
+        if (Auth::user()->role !== 'admin' && Auth::id() !== $berita->user_id) {
+            abort(403); // Jika bukan admin dan bukan pemilik, tolak akses
+        }
+
+        // Hapus file gambar dari penyimpanan publik
+        if ($berita->gambar) {
+            Storage::disk('public')->delete($berita->gambar);
+        }
+
+        // Hapus data berita dari database
         $berita->delete();
-        return redirect()->route('berita.index')->with('success', 'Berita dihapus.');
-    }
-    
+
+        return redirect()->route('berita.index')->with('success', 'Berita berhasil dihapus.');
+    }    
 }

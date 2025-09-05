@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
-
+use Intervention\Image\Facades\Image;
 class ProfileController extends Controller
 {
     /**
@@ -18,7 +18,7 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): View
     {
-        return view('profile.edit', [
+        return view('profile.update', [
             'user' => $request->user(),
         ]);
     }
@@ -59,6 +59,59 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
+        public function profile()
+    {
+        $user = User::findOrFail(Auth::id());
+        return view('profile.show', compact('user'));
+    }
+
+
+        public function updateProfile(Request $request)
+        {
+            $user = User::findOrFail(Auth::id());
+
+            $request->validate([
+                'name' => 'required|string|max:255',
+                'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
+                'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+                'current_password' => 'nullable|string',
+                'password' => 'nullable|string|min:8|confirmed',
+            ]);
+
+            $data = [
+                'name' => $request->name,
+                'email' => $request->email,
+            ];
+
+            if ($request->hasFile('avatar')) {
+                $avatar = $request->file('avatar');
+                $filename = time() . '.' . $avatar->getClientOriginalExtension();
+                $path = public_path('uploads/avatar/' . $filename);
+
+                Image::make($avatar)
+                    ->fit(500, 500)
+                    ->save($path);
+
+                if ($user->avatar && file_exists(public_path('uploads/avatar/' . $user->avatar))) {
+                    unlink(public_path('uploads/avatar/' . $user->avatar));
+                }
+
+                $data['avatar'] = $filename;
+            }
+
+            if ($request->filled('password')) {
+                if (!Hash::check($request->current_password, $user->password)) {
+                    return back()->withErrors(['current_password' => 'Password lama tidak sesuai.']);
+                }
+                $data['password'] = Hash::make($request->password);
+            }
+
+            $user->fill($data);
+            $user->save();
+
+            return redirect()->route('profile.show')->with('success', 'Profil berhasil diperbarui!');
+        }
+
         public function destroyAccount(Request $request)
         {
             $user = User::findOrFail(Auth::id());
