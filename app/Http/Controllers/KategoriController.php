@@ -43,7 +43,9 @@ class KategoriController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $kategori = Kategori::find($id);
+        $berita = $kategori->beritas()->paginate(10);
+        return view('web.kategori', compact('kategori', 'berita'));
     }
 
     /**

@@ -38,6 +38,7 @@
         </div>
     </div> -->
     <!-- Preloader Start -->
+     
 
     <header>
         <!-- Header Start -->
@@ -81,6 +82,7 @@
                         </div>
                    </div>
                 </div>
+                
                <div class="header-bottom header-sticky">
                     <div class="container">
                         <div class="row align-items-center">
@@ -94,7 +96,7 @@
                                     <nav>                  
                                         <ul id="navigation">    
                                             <li><a href="{{ url('/') }}">Home</a></li>
-                                            <li><a href="categori.html">Category</a></li>
+                                            <li><a href="#kategori">Category</a></li>
                                             <li><a href="about.html">About</a></li>
                                             <li><a href="latest_news.html">Latest News</a></li>
                                             <li><a href="contact.html">Contact</a></li>
@@ -121,6 +123,7 @@
                                     </div>
                                 </div>
                             </div>
+                            
                             <!-- Mobile Menu -->
                             <div class="col-12">
                                 <div class="mobile_menu d-block d-md-none"></div>
@@ -132,10 +135,12 @@
        </div>
         <!-- Header End -->
     </header>
+    
 
     <main>
         @yield('content')
     </main>
+    
 
    <footer>
        <!-- Footer Start-->

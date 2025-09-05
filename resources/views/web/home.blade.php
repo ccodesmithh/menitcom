@@ -125,7 +125,7 @@
                             <h4 class="mb-3">Kategori</h4>
                             <div class="list-group">
                                 @foreach($kategoris as $kat)
-                                    <a href="{{ route('kategori.show', $kat->id) }}" 
+                                    <a href="{{ route('web.kategori', $kat->id) }}" 
                                     class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
                                         {{ $kat->nama }}
                                         <span class="badge bg-primary rounded-pill">{{ $kat->beritas_count }}</span>
@@ -198,7 +198,7 @@
     </div>           
     <!-- End Weekly-News -->
    <!-- Whats New Start -->
-    <section class="whats-news-area pt-50 pb-20">
+    <section class="whats-news-area pt-50 pb-20" id="ketegori">
         <div class="container">
             <div class="row">
             <div class="col-lg-8">
@@ -218,7 +218,7 @@
                                     $kategoriList = App\Models\Kategori::all();
                                     @endphp
                                     @foreach ($kategoriList as $kat)
-                                        <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">{{ $kat->nama }}</a>
+                                        <a class="nav-item nav-link" href="{{ route('web.kategori', $kat->id) }}">{{ $kat->nama }}</a>
                                     @endforeach
                                 </div>
                             </nav>
