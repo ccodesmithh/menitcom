@@ -105,7 +105,7 @@
                         </div>
                     </div>
 
-                    <!-- optional: additional buttons below for mobile -->
+                    <!-- optional: additional buttons below for mobile. -->
                     <div class="d-md-none mt-3 text-end">
                         <button type="submit" class="btn btn-success btn-sm">Simpan</button>
                     </div>
